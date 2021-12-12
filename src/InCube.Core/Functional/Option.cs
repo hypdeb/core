@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using InCube.Core.Format;
-using JetBrains.Annotations;
 using Newtonsoft.Json;
 using static InCube.Core.Preconditions;
 

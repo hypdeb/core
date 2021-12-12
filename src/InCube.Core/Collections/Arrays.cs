@@ -1,5 +1,3 @@
-﻿using JetBrains.Annotations;
-
 namespace InCube.Core.Collections;
 
 /// <summary>
