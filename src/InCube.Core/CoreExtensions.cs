@@ -4,5 +4,4 @@ namespace InCube.Core;
 
 public class CoreExtensions
 {
-    
 }
