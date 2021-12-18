@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -478,6 +478,7 @@ public static class Tuples
     /// <typeparam name="T1">Type of the first element.</typeparam>
     /// <typeparam name="T2">Type of the second element.</typeparam>
     /// <returns>An <see cref="IEnumerable{T}" /> of pairs.</returns>
-    public static IEnumerable<(T1 First, T2 Second)> WhereSecondNotNull<T1, T2>(this IEnumerable<(T1 First, T2? Second)> pairs) =>
-        pairs.Where(pair => pair.Second != null)!;
+    public static IEnumerable<(T1 First, T2 Second)> WhereSecondNotNull<T1, T2>(this IEnumerable<(T1 First, T2? Second)> pairs)
+        where T2 : struct =>
+        pairs.Where(pair => pair.Second != null).Select(p => (p.First, p.Second!.Value));
 }
