@@ -468,8 +468,9 @@ public static class Tuples
     /// <typeparam name="T1">Type of the first element.</typeparam>
     /// <typeparam name="T2">Type of the second element.</typeparam>
     /// <returns>An <see cref="IEnumerable{T}" /> of pairs.</returns>
-    public static IEnumerable<(T1 First, T2 Second)> WhereFirstNotNull<T1, T2>(this IEnumerable<(T1? First, T2 Second)> pairs) =>
-        pairs.Where(pair => pair.First != null)!;
+    public static IEnumerable<(T1 First, T2 Second)> WhereFirstNotNull<T1, T2>(this IEnumerable<(T1? First, T2 Second)> pairs)
+        where T1 : struct =>
+        pairs.Where(pair => pair.First != null).Select(pair => (pair.First!.Value, pair.Second));
 
     /// <summary>
     /// Convenience method to filter some <paramref name="pairs" /> on the nullability of the second element.
