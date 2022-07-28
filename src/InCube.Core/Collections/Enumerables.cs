@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using InCube.Core.Functional;
@@ -650,33 +650,4 @@ public static class Enumerables
     /// <param name="ys">Second enumerable.</param>
     /// <returns>An enumerable of booleans.</returns>
     public static IEnumerable<bool> Or(this IEnumerable<bool> xs, IEnumerable<bool> ys) => xs.Zip(ys, (x, y) => x || y);
-
-    /// <summary>
-    /// Splits the input <see cref="IEnumerable{T}" /> into chunks.
-    /// </summary>
-    /// <param name="self">The <see cref="IEnumerable{T}" /> to split.</param>
-    /// <param name="chunkSize">The size of each chunk.</param>
-    /// <typeparam name="T">The type of the <see cref="IEnumerable{T}" />.</typeparam>
-    /// <returns>An <see cref="IEnumerable{T}" /> of <see cref="IEnumerable{T}" />s.</returns>
-    public static IEnumerable<IReadOnlyList<T>> Chunk<T>(this IEnumerable<T> self, int chunkSize)
-    {
-        var enumerator = self.GetEnumerator();
-
-        IEnumerable<T> NextChunk()
-        {
-            var index = 1;
-            while (index < chunkSize && enumerator.MoveNext())
-            {
-                index++;
-                yield return enumerator.Current;
-            }
-        }
-
-        while (enumerator.MoveNext())
-        {
-            var current = enumerator.Current;
-            var nextChunk = NextChunk();
-            yield return nextChunk.Prepend(current).ToList();
-        }
-    }
 }
