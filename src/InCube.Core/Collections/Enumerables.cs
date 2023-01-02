@@ -271,24 +271,6 @@ public static class Enumerables
     }
 
     /// <summary>
-    /// Flattens a collection of nullable value types into an enumerable, effectively removing the null values.
-    /// </summary>
-    /// <typeparam name="T">The type of the nullable's.</typeparam>
-    /// <param name="enumerable">The enumerable of nullable's.</param>
-    /// <returns>A collection of (non-nullable) elements.</returns>
-    public static IEnumerable<T> WhereNotNull<T>(this IEnumerable<T?> enumerable)
-        where T : class
-    {
-        using var enumerator = enumerable.GetEnumerator();
-        while (enumerator.MoveNext())
-        {
-            if (enumerator.Current is null)
-                continue;
-            yield return enumerator.Current!;
-        }
-    }
-
-    /// <summary>
     /// Checks whether an enumerable is empty or not.
     /// </summary>
     /// <typeparam name="T">The type of the enumerable to check for emptiness.</typeparam>
